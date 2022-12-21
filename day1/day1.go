@@ -1,9 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
-	"bufio"
 	"strconv"
 )
 
@@ -72,12 +72,10 @@ func day2(scanner *bufio.Scanner) {
 			sum[3] = sum[2]
 			sum[2] = sum[1]
 			sum[1] = sum[0]
-		} else
-		if sum[0] > sum[2] {
+		} else if sum[0] > sum[2] {
 			sum[3] = sum[2]
 			sum[2] = sum[0]
-		} else
-		if sum[0] > sum[3] {
+		} else if sum[0] > sum[3] {
 			sum[3] = sum[0]
 		}
 		sum[0] = 0
