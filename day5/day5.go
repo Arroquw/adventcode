@@ -16,7 +16,6 @@ func main() {
 	for scanner.Scan() {
 		input = append(input, scanner.Text())
 	}
-//	fmt.Println(input)
 	day5(input)
 }
 
@@ -105,13 +104,3 @@ func replace(input string) string {
 	return string(temp)
 }
 
-func printArray(c supplies) {
-	for i := 0; i < len(c); i++ {
-		fmt.Println(i)
-		for j := 0; j < len(c[i]); j++ {
-			fmt.Print(c[i][j])
-		}
-		fmt.Println()
-	}
-	fmt.Println()
-}
