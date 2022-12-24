@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"bufio"
+	"fmt"
 	"os"
-	"strings"
 	"strconv"
+	"strings"
 )
 
 type supplies [][]string
@@ -38,12 +38,12 @@ func day5(input []string) {
 			temp := replace(s)
 			rowSplit := strings.Split(temp, "-")
 			c = append(c, rowSplit)
-						continue
+			continue
 		}
 		temp := strings.Split(s, " ")
 		count, _ := strconv.ParseInt(temp[1], 10, 32)
-		source, _ := strconv.ParseInt(temp[3], 10 , 32)
-		dest, _ := strconv.ParseInt(temp[5], 10 , 32)
+		source, _ := strconv.ParseInt(temp[3], 10, 32)
+		dest, _ := strconv.ParseInt(temp[5], 10, 32)
 
 		columns2.move(count, source, dest)
 		columns.moveStack(count, source, dest)
@@ -103,4 +103,3 @@ func replace(input string) string {
 	}
 	return string(temp)
 }
-
