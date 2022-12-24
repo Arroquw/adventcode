@@ -23,11 +23,14 @@ func main() {
 func day5(input []string) {
 	var c supplies
 	var columns supplies
+	var columns2 supplies
 	var result string
+	var result2 string
 	for _, s := range input {
 		if !strings.Contains(s, "move") {
 			if s == "" {
 				columns = transpose(c)
+				columns2 = transpose(c)
 			}
 			if !strings.Contains(s, "[") {
 				continue
@@ -43,22 +46,33 @@ func day5(input []string) {
 		source, _ := strconv.ParseInt(temp[3], 10 , 32)
 		dest, _ := strconv.ParseInt(temp[5], 10 , 32)
 
-		columns.move(count, source, dest)
+		columns2.move(count, source, dest)
+		columns.moveStack(count, source, dest)
 	}
 	for _, i := range columns {
 		result += i[0]
 	}
+	for _, i := range columns2 {
+		result2 += i[0]
+	}
+	temp2 := strings.ReplaceAll(result2, "[", "")
+	fmt.Println(strings.ReplaceAll(temp2, "]", ""))
 	temp := strings.ReplaceAll(result, "[", "")
 	fmt.Println(strings.ReplaceAll(temp, "]", ""))
 }
 
 func (c *supplies) move(count int64, source int64, dest int64) {
-	//for count
-		//c[source][len(c[source]].delete -> c[dest][len(c[dest]].append
 	for i := int64(0); i < count; i++ {
 		(*c)[dest-1] = append([]string{(*c)[source-1][0]}, (*c)[dest-1]...)
-		(*c)[source-1][0], (*c)[source-1] = (*c)[source-1][0], (*c)[source-1][1:]
+		(*c)[source-1] = (*c)[source-1][1:]
 	}
+}
+
+func (c *supplies) moveStack(count int64, source int64, dest int64) {
+	temp := make([]string, len((*c)[source-1][:count]))
+	copy(temp, (*c)[source-1][:count])
+	(*c)[dest-1] = append(temp, (*c)[dest-1]...)
+	(*c)[source-1] = (*c)[source-1][count:]
 }
 
 func transpose(input supplies) supplies {
@@ -95,7 +109,9 @@ func printArray(c supplies) {
 	for i := 0; i < len(c); i++ {
 		fmt.Println(i)
 		for j := 0; j < len(c[i]); j++ {
-			fmt.Println(c[i][j])
+			fmt.Print(c[i][j])
 		}
+		fmt.Println()
 	}
+	fmt.Println()
 }
