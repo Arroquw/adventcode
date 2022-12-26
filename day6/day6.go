@@ -12,7 +12,8 @@ type window []rune
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		day6pt2(scanner.Text())
+		day6pt2(scanner.Text(), 4)
+		day6pt2(scanner.Text(), 14)
 	}
 }
 
@@ -22,8 +23,8 @@ func (s window) Push(v rune) window {
 	return temp
 }
 
-func day6pt2(input string) {
-	old := make(window, 14)
+func day6pt2(input string, size int) {
+	old := make(window, size)
 	duplicates := 0
 	count := 0
 	for _, c := range input {
@@ -33,7 +34,7 @@ func day6pt2(input string) {
 				duplicates += strings.Count(temp, string(r))
 			}
 		}
-		if duplicates == 14 && len(temp) >= 14{
+		if duplicates == size && len(temp) >= size {
 			break
 		}
 		duplicates = 0
